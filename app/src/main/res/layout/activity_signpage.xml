@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="#F3F4F6">
+
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="101dp"
+        android:layout_height="73dp"
+        android:layout_marginBottom="32dp"
+        android:contentDescription="@string/newlogo"
+        android:src="@mipmap/newuser" />
+
+    <!-- Name EditText -->
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:padding="12dp"
+        android:background="@drawable/edittextcss"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Age EditText -->
+    <EditText
+        android:id="@+id/editTextAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Age"
+        android:padding="12dp"
+        android:background="@drawable/edittextcss"
+        android:textColor="#333333"
+        android:inputType="number"
+        android:layout_marginBottom="16dp" />
+
+
+
+    <!-- Phone Number EditText -->
+    <EditText
+        android:id="@+id/editTextPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone Number"
+        android:padding="12dp"
+        android:background="@drawable/edittextcss"
+        android:textColor="#333333"
+        android:inputType="phone"
+        android:maxLength="10"
+        android:layout_marginBottom="16dp" />
+
+    <!-- User ID EditText -->
+    <EditText
+        android:id="@+id/editTextUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="User ID"
+        android:padding="12dp"
+        android:background="@drawable/edittextcss"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Password EditText -->
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:padding="12dp"
+        android:background="@drawable/edittextcss"
+        android:textColor="#333333"
+        android:inputType="textPassword"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Re-enter Password EditText -->
+    <EditText
+        android:id="@+id/editTextReenterPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Re-enter Password"
+        android:padding="12dp"
+        android:background="@drawable/edittextcss"
+        android:textColor="#333333"
+        android:inputType="textPassword"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Signup Button -->
+    <Button
+        android:id="@+id/buttonSignup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Signup"
+        android:background="@color/purple_500"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:enabled="false"/>
+
+</LinearLayout>
