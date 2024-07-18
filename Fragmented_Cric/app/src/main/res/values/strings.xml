@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Fragmented_Cric</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="cricket_game">Cricket Game</string>
+    <string name="your_score">Your Score</string>
+    <string name="enter_a_number_between_1_6">Enter a Number between 1–6</string>
+    <string name="play">Play</string>
+    <string name="computer_played_a">Computer bowled a</string>
+    <string name="status">Status</string>
+    <string name="computer_hand">Computer_hand</string>
+    <string name="score">Score</string>
+    <string name="rules">Rules</string>
+    <string name="gif">Gif</string>
+    <string name="clickme">ClickMe</string>
+</resources>
