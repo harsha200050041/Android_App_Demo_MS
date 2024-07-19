@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">FragmentApp</string>
+
+    <string name="hello_blank_fragment_1">Hello blank fragment 1</string>
+    <string name="hello_blank_fragment_2">Hello blank fragment 2</string>
+
+    <string name="google">Sign in to Google</string>
+    <string name="facebook">Sign in to Facebook</string>
+    <string name="linkedin">Sign in to LinkedIn</string>
+    <string name="instagram">Sign in to Instagram</string>
+    <string name="twitter">Sign in to Twitter</string>
+    <string name="steam">Sign in to Steam</string>
+    <string name="microsoft">Sign in to Microsoft</string>
+    <string name="github">Sign in to Github</string>
+    <string name="apple">Sign in to Apple</string>
+    <string name="signInHeading">Sign in to a social website</string>
+    <string name="footer">Developed by Manas Gupta</string>
+    <string name="fragment_1">Fragment 1</string>
+    <string name="fragment_2">Fragment 2</string>
+</resources>
