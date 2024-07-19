@@ -2,26 +2,41 @@ package com.example.task;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 public class FirstPage extends AppCompatActivity {
 
-    database d = new database();
-    private TextView textViewDetails;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_first_page);
-        textViewDetails = findViewById(R.id.textViewDetails);
 
         Intent intent = getIntent();
         String u = intent.getStringExtra(MainActivity.userkey);
         String p= intent.getStringExtra(MainActivity.passkey);
 
-        textViewDetails.setText(d.display(u,p));
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView, new WelcomePage(u, p))
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        FragmentManager fm = getSupportFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            fm.popBackStack();
+        } else {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish(); // Close the current activity
+        }
     }
 }

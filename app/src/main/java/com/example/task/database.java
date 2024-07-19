@@ -1,9 +1,5 @@
 package com.example.task;
 
-import static android.content.ContentValues.TAG;
-
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -15,15 +11,38 @@ public class database {
     static private ArrayList<String> userid = new ArrayList<>();
     static private ArrayList<String> pass = new ArrayList<>();
 
-    public void set(String n, String a, String ph, String u, String p)
+
+    private boolean duplication(String u)
     {
-        name.add(n);
-        age.add(a);
-        phone.add(ph);
-        userid.add(u);
-        pass.add(p);
+        int i;
+        for(i=0;i<userid.size();i++)
+            if(Objects.equals(userid.get(i), u))
+                return true;
+
+        return false ;
     }
 
+    // Will update the data in the database
+    public boolean set(String n, String a, String ph, String u, String p)
+    {
+        boolean flag = duplication(u);
+        if(flag)
+        {
+            // duplication is there
+            return true ;
+        }
+        else
+        {
+            name.add(n);
+            age.add(a);
+            phone.add(ph);
+            userid.add(u);
+            pass.add(p);
+            return false;
+        }
+    }
+
+    // Will validate the User
     public boolean validateUser(String u, String p)
     {
         int i;
@@ -35,6 +54,7 @@ public class database {
         return false;
     }
 
+    // Will display the data of the user
     public String display(String u, String p)
     {
         int i;
@@ -49,5 +69,16 @@ public class database {
         }
         return message;
     }
+
+    public void addAdminDetail()
+    {
+        name.add("Admin");
+        age.add("25");
+        phone.add("9769711024");
+        userid.add("admin");
+        pass.add("1234");
+    }
+
+
 
 }

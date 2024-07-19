@@ -1,18 +1,17 @@
 package com.example.task;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import java.util.Random;
+
+import com.example.task.controller.DisplayUtils;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     // database the model view
     database d = new database();
+    DisplayUtils displayUtils = new DisplayUtils();
 
     // for watching whether some one have entered details or not
     TextWatcher textWatcher = new TextWatcher() {
@@ -51,31 +51,9 @@ public class MainActivity extends AppCompatActivity {
         login.setEnabled(!text1.isEmpty() && !text2.isEmpty() && !text3.isEmpty() && text3.equals(text4));
     }
 
-    // generating random captcha
-    private String generateRandomCaptcha() {
-
-        Random random = new Random();
-        StringBuilder captcha = new StringBuilder();
-        for (int i = 0; i < 6; i++) {
-            int charType = random.nextInt(3);
-            switch (charType) {
-                case 0:
-                    captcha.append((char) (random.nextInt(10) + '0')); // Digits
-                    break;
-                case 1:
-                    captcha.append((char) (random.nextInt(26) + 'A')); // Uppercase letters
-                    break;
-                case 2:
-                    captcha.append((char) (random.nextInt(26) + 'a')); // Lowercase letters
-                    break;
-            }
-        }
-        return captcha.toString();
-    }
-
     // displaying captcha
     private void generateCaptcha() {
-        captchaCode = generateRandomCaptcha();
+        captchaCode = displayUtils.generateRandomCaptcha();
         captchaDisplay.setText(captchaCode);
     }
 
@@ -98,36 +76,6 @@ public class MainActivity extends AppCompatActivity {
         captcha.addTextChangedListener(textWatcher);
     }
 
-
-    // checking whether valid user or not
-    private boolean validUser(String u, String p)
-    {
-        return d.validateUser(u,p);
-    }
-
-    // Dialog box to view detail to the user when enter wrong credentials
-     private void display()
-     {
-         // Creating and displaying a simple AlertDialog
-         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-         builder.setTitle("Wrong Credentials")
-                 .setMessage("U have Entered Wrong Credentials")
-                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                     public void onClick(DialogInterface dialog, int which) {
-
-                     }
-                 })
-                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                     public void onClick(DialogInterface dialog, int which) {
-
-                         dialog.dismiss();
-                     }
-                 })
-                 .show();
-
-     }
-
-
     // after login task if enter proper data then or else clear the view
     private void afterLogin( boolean flag)
     {
@@ -145,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             // if details are wrong
-            display();
+            displayUtils.displayWrongCredentials(this,"U Have Entered Wrong Credentials");
             generateCaptcha();
             watcher();
         }
@@ -161,8 +109,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // adding details
+        d.addAdminDetail();
 
-        // getting the views from the activity
+        // Call viewSet method from ViewUtils to initialize the views
         viewSet();
 
         // calling the function to generate and set captcha
@@ -173,12 +123,11 @@ public class MainActivity extends AppCompatActivity {
 
         // On login button
         login.setOnClickListener(v -> {
-
             // players names
             String user_userid = userId.getText().toString();
             String user_password = password.getText().toString();
 
-            boolean flag = validUser(user_userid,user_password);
+            boolean flag = d.validateUser(user_userid,user_password);
 
             // to carryout the further task
             afterLogin(flag);

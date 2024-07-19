@@ -6,16 +6,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.task.controller.DisplayUtils;
+
 public class signpage extends AppCompatActivity {
 
     database d = new database();
+    DisplayUtils displayUtils = new DisplayUtils();
+
     private EditText editTextName, editTextAge, editTextPhoneNumber, editTextUserId, editTextPassword, editTextReenterPassword;
     private Button buttonSignup;
 
@@ -114,12 +115,32 @@ public class signpage extends AppCompatActivity {
 
         // On login button
         buttonSignup.setOnClickListener(v -> {
-            Intent intent = new Intent(this,MainActivity.class);
 
-            d.set(name, age, phoneNumber, userId, password);
-            startActivity(intent);
+            boolean flag = d.set(name, age, phoneNumber, userId, password);
+            if(flag)
+            {
+                displayUtils.displayWrongCredentials(this,"Userid is already exits, Please Enter new Userid");
+                reset();
+                watcher();
+            }
+            else
+            {
+                Intent intent = new Intent(this,MainActivity.class);
+                startActivity(intent);
+            }
+
         });
 
+    }
+
+    private void reset()
+    {
+        editTextName.setText("");
+        editTextAge.setText("");
+        editTextPhoneNumber.setText("");
+        editTextUserId.setText("");
+        editTextPassword.setText("");
+        editTextReenterPassword.setText("");
     }
 
     @Override
@@ -131,12 +152,7 @@ public class signpage extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        editTextName.setText("");
-        editTextAge.setText("");
-        editTextPhoneNumber.setText("");
-        editTextUserId.setText("");
-        editTextPassword.setText("");
-        editTextReenterPassword.setText("");
+        reset();
     }
 
 
